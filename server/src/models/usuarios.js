@@ -4,39 +4,45 @@ const nuevoUsuario = mongoose.Schema({
     rol: {
         type: String,
         trim: true,
-        require: true
+        required: true,
     },
     nombre: {
         type: String,
         trim: true,
-        require: true
+        required: true,
+
     },
     apellido: {
         type: String,
         trim: true,
-        require: true
+        required: true,
+
     },
     email: {
         type: String,
         trim: true,
-        require: true,
+        required: true,
         unique: true
     },
     cedula: {
         type: String,
         trim: true,
-        require: true,
+        required: true,
+        maxlength: 10,
         unique: true
     },
     telefono: {
         type: String,
         trim: true,
-        require: true,
-    },    
+        maxlength: 10,
+        required: true,
+
+    },
     contrasena: {
         type: String,
+        required: true,
         trim: true,
-        require: true
+        unique: true
     }
 
 }, { versionKey: false })

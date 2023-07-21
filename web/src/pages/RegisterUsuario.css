@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.register__usuario_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #081930;
+}
+
+.register_img{
+    width: 80%;
+    margin: auto;
+}
+
+.register_img img{
+    width: 100%;
+}
+
+.register__usuario_form{
+    width: 90%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.register__usuario_form form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.register__usuario_form h1{
+    color: #0082c9;
+    margin: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.register__usuario_form div{
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+}
+
+.register__usuario_form label{
+    color: #42e5fd;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+.register__usuario_form input{
+    padding: 10px;
+    width: 100%;
+    margin: 10px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.register__usuario_form select{
+    padding: 10px;
+    width: 100%;
+    margin: 10px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.register__usuario_form .boton{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    
+}
+.register__usuario_form .boton button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #42e5fd;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+
+.alerta{
+    background: #42e5fd;
+    color: #081930;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 30px;
+}
