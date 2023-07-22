@@ -1,0 +1,28 @@
+version : '3'
+services:
+  mongo:  
+    image: "mongo"
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongodb:/data/db
+    
+  server:
+    restart: always
+    build: ./server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      DB_URL: mongo://db/mongodb
+      
+  web: 
+    restart: always
+    build: ./web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+volumes:
+  mongodb:
