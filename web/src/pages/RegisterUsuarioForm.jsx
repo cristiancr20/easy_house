@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import register_img from "../img/register.svg"
 
-import "./RegisterUsuario.css";
+import "./UsuarioStyle.css";
 
 import { registrarPersona } from "../core/apiCore";
 import { Link } from "react-router-dom";

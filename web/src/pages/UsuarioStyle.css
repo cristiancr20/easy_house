@@ -13,7 +13,8 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.register__usuario_container{
+.register__usuario_container,
+.login__usuario_container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -22,16 +23,19 @@
     background: var(--color-uno);
 }
 
-.register_img{
+.register_img,
+.login_img{
     width: 80%;
     margin: auto;
 }
 
-.register_img img{
+.register_img img,
+.login_img img{
     width: 100%;
 }
 
-.register__usuario_form{
+.register__usuario_form,
+.login__usuario_form{
     width: 90%;
     padding: 20px;
     border-radius: 20px;
@@ -42,27 +46,31 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
-.register__usuario_form h1{
+.register__usuario_form h1,
+.login__usuario_form h1{
     color: var(--color-dos);
     margin: 10px;
     text-align: center;
     font-weight: bold;
 }
 
-.register__usuario_form div{
+.register__usuario_form div,
+.login__usuario_form div{
     width: 80%;
     margin: auto;
     padding: 10px;
 }
 
-.register__usuario_form label{
+.register__usuario_form label,
+.login__usuario_form label{
     color: var(--color-dos);
     font-weight: bold;
     display: block;
     text-align: center;
 }
 
-.register__usuario_form input{
+.register__usuario_form input,
+.login__usuario_form input{
     padding: 10px;
     width: 100%;
     margin: 10px;
@@ -71,13 +79,15 @@
     border: none;
 }
 
-.register__usuario_form .boton{
+.register__usuario_form .boton,
+.login__usuario_form .boton{
     width: 50%;
     display: flex;
     justify-content: center;
     
 }
-.register__usuario_form .boton button{
+.register__usuario_form .boton button,
+.login__usuario_form .boton button{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -92,13 +102,15 @@
 }
 
 
-.register__usuario_form .boton button:hover{
+.register__usuario_form .boton button:hover,
+.login__usuario_form .boton button:hover{
     transform: scale(1.2);
     color: var(--color-uno);
     background: #fff;
 }
 
-.register__usuario_form  .iniciarSesion{
+.register__usuario_form  .iniciarSesion,
+.login__usuario_form .registrarUsuario{
     text-align: center;
     margin: 20px;
     color: #fff;
