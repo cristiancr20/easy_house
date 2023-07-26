@@ -10,7 +10,6 @@ const nuevoUsuario = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-
     },
     apellido: {
         type: String,
@@ -42,7 +41,6 @@ const nuevoUsuario = mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
     }
 
 }, { versionKey: false })

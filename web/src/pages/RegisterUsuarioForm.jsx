@@ -15,24 +15,26 @@ const RegisterUsuarioForm = () => {
     cedula: '',
     telefono: '',
     contrasena: '',
+    success: false,
     error: '',
-    success: false
+    loading: false
   });
 
-  const { rol, nombre, apellido, email, cedula, telefono, contrasena, success, error } = values;
+  const { rol, nombre, apellido, email, cedula, telefono, contrasena, success, error, loading } = values;
 
-  const handleChange = email => event => {
-    setValues({ ...values, error: false, [email]: event.target.value })
+  const handleChange = event => {
+    setValues({ ...values, error: '', [event.target.name]: event.target.value });
   }
 
-  const clickSubmit = event => {
-    event.preventDefault();
-    setValues({ ...values, error: false })
-    registrarPersona({ rol, nombre, apellido, email, cedula, telefono, contrasena })
+  const clickSubmit = () => {
+    setValues({ ...values, error: '', loading: true });
+    const user = { rol, nombre, apellido, email, cedula, telefono, contrasena };
+    registrarPersona(user)
       .then(data => {
         if (data.error) {
-          setValues({ ...values, error: data.error, success: false })
+          setValues({ ...values, error: data.error, success: false, loading: false });
         } else {
+
           setValues({
             ...values,
             rol: '',
@@ -43,10 +45,14 @@ const RegisterUsuarioForm = () => {
             telefono: '',
             contrasena: '',
             error: '',
-            success: true
-          })
+            success: true,
+            loading: false
+          });
         }
       })
+      .catch(error => {
+        setValues({ ...values, error: 'Hubo un problema con la solicitud.', success: false, loading: false });
+      });
   }
 
   const signUpForm = () => (
@@ -66,7 +72,7 @@ const RegisterUsuarioForm = () => {
               name="rol"
               value={rol}
               placeholder="Rol"
-              onChange={handleChange('rol')}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -77,7 +83,7 @@ const RegisterUsuarioForm = () => {
               name="nombre"
               value={nombre}
               placeholder="Nombre"
-              onChange={handleChange('nombre')}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -88,7 +94,7 @@ const RegisterUsuarioForm = () => {
               name="apellido"
               value={apellido}
               placeholder="Apellido"
-              onChange={handleChange('apellido')}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -99,7 +105,7 @@ const RegisterUsuarioForm = () => {
               name="email"
               value={email}
               placeholder="Email"
-              onChange={handleChange('email')}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -110,7 +116,7 @@ const RegisterUsuarioForm = () => {
               name="cedula"
               value={cedula}
               placeholder="Cedula"
-              onChange={handleChange('cedula')}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -121,7 +127,7 @@ const RegisterUsuarioForm = () => {
               name="telefono"
               value={telefono}
               placeholder="Telefono"
-              onChange={handleChange('telefono')}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -132,17 +138,19 @@ const RegisterUsuarioForm = () => {
               name="contrasena"
               value={contrasena}
               placeholder="Contraseña"
-              onChange={handleChange('contrasena')}
+              onChange={handleChange}
             />
           </div>
         </form>
         <div className="boton">
-          <button type="submit" onClick={clickSubmit}>Registrarse</button>
+          <button type="submit" onClick={clickSubmit}>
+            {loading ? 'Cargando...' : 'Registrarse'}
+          </button>
         </div>
         <Link to="/iniciar/sesion" >
-            <p className="iniciarSesion">
-              Iniciar Sesion
-            </p>
+          <p className="iniciarSesion">
+            Iniciar Sesion
+          </p>
         </Link>
       </div>
     </div>
@@ -150,7 +158,7 @@ const RegisterUsuarioForm = () => {
 
   const showError = () => (
     <div className='alerta' style={{ display: error ? '' : 'none' }}>
-      Error al crear la cuenta. Intente de nuevo.
+      {error}
     </div>
   )
 

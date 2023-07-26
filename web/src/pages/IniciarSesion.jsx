@@ -25,39 +25,43 @@ const IniciarSesion = () => {
     const clickSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: false, loading: true });
-        iniciarSesion({ email, contrasena }).then((data) => {
-            if (data.error) {
-                setValues({ ...values, error: data.error, loading: false });
-            } else {
-                authenticate(data, () => {
-                    setValues({
-                        ...values,
-                        redirectToReferrer: true,
+        iniciarSesion({ email, contrasena })
+            .then((data) => {
+                if (data.error) {
+                    setValues({ ...values, error: data.error, loading: false });
+                } else {
+                    authenticate(data, () => {
+                        setValues({
+                            ...values,
+                            redirectToReferrer: true,
+                        });
                     });
+                }
+            })
+            .catch((error) => {
+                // Aquí manejas el error y muestras un mensaje en la interfaz de usuario
+                setValues({
+                    ...values,
+                    error: "Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde.",
+                    loading: false,
                 });
-            }
-        });
+            });
     };
 
     const showError = () => (
-        <div className="" style={{ display: error ? "" : "none" }}>
+        <div className={`alerta ${error ? "" : "hidden"}`}>
             {error}
         </div>
     );
 
-    const showLoading = () =>
-        loading && (
-            <div className="">
-                <h2>Cargando...</h2>
-            </div>
-        );
+
 
     const redirectUser = () => {
         if (redirectToReferrer) {
             if (
                 user.email === email &&
                 user.contrasena === contrasena &&
-                user.rol === "1"
+                user.rol === "Arrendador"
             ) {
                 console.log(user);
                 return (window.location.href = "/arrendador");
@@ -65,14 +69,12 @@ const IniciarSesion = () => {
             if (
                 user.email === email &&
                 user.contrasena === contrasena &&
-                user.rol === "0"
+                user.rol === "Arrendatario"
             ) {
                 return (window.location.href = "/arrendatario");
             }
         }
-        //if (isAuthenticated()) {
-        //  return window.location.href = '/'
-        //}
+        // Si no está autenticado o no cumple ninguna condición de redirección, no hace nada.
     };
 
     const signInForm = () => (
@@ -89,6 +91,7 @@ const IniciarSesion = () => {
                             onChange={handleChange("email")}
                             type="email"
                             className="form-control"
+                            placeholder="Ingrese su correo electrónico"
                             value={email}
                         />
                     </div>
@@ -98,13 +101,14 @@ const IniciarSesion = () => {
                             onChange={handleChange("contrasena")}
                             type="password"
                             className="form-control"
+                            placeholder="Ingrese su contraseña"
                             value={contrasena}
                         />
                     </div>
                 </form>
                 <div className="boton">
                     <button type="submit" onClick={clickSubmit}>
-                        Iniciar sesión
+                        {loading ? "Cargando..." : "Iniciar sesión"}
                     </button>
                 </div>
                 <Link to="/registrar/usuarios">
@@ -117,7 +121,6 @@ const IniciarSesion = () => {
     return (
         <div className="container">
             {showError()}
-            {showLoading()}
             {signInForm()}
             {redirectUser()}
             <br />

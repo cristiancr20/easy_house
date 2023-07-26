@@ -1,28 +1,37 @@
-version : '3'
+version: "3.9"
+
 services:
-  mongo:  
-    image: "mongo"
-    ports:
-      - "27019:27017"
-    volumes:
-      - mongodb:/data/db
-    
-  server:
-    restart: always
-    build: ./server
-    ports:
-      - "5000:5000"
-    depends_on:
-      - mongo
-    environment:
-      DB_URL: mongo://db/mongodb
-      
-  web: 
-    restart: always
+  # Servicio para la aplicación React
+  web:
+    container_name: react-app
     build: ./web
     ports:
-      - "3000:3000"
-    depends_on:
-      - server
-volumes:
-  mongodb:
+      - "3000:3000" # Mapeo de puertos (puerto del host:puerto del contenedor)
+    networks:
+      - redapp
+
+  # Servicio para el servidor Node.js
+  server:
+    container_name: node-server
+    build: ./server
+    ports:
+      - "5000:5000" # Mapeo de puertos (puerto del host:puerto del contenedor)
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/easyhouse
+    networks:
+      - redapp
+    volumes:
+      - ./server:/app
+
+  # Servicio para MongoDB
+  mongo:
+    container_name: mongo-db
+    image: mongo # Utilizamos la imagen oficial de MongoDB desde Docker Hub
+    ports:
+      - "27019:27017" # Mapeo de puertos (puerto del host:puerto del contenedor)
+    networks:
+      - redapp
+
+networks:
+  redapp:
+    external: true

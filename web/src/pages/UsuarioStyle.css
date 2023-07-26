@@ -119,8 +119,6 @@
     
 }
 
-
-
 .alerta{
     background: var(--color-dos);
     color: var(--color-uno);
@@ -128,6 +126,11 @@
     font-weight: bold;
     padding: 10px;
     font-size: 30px;
+}
+
+/* Agregar estilo para ocultar elemento */
+.hidden {
+    display: none;
 }
 
 

@@ -1,30 +1,25 @@
+const router = require('express').Router();
 const usuario = require('../models/usuarios')
 const jwt = require('jsonwebtoken');
 
 //crear un nuevo usuario
-exports.crearUsuario = (req, res) => {
-    const { rol, nombre, apellido, email, cedula, telefono, contrasena } = req.body;
-    if(rol === "Arrendador"){
-        rol ="1";
-    }
-    if(rol === "Arrendatario"){
-        rol ="0";
-    }
+exports.crearUsuario = async (req, res) => {
     const nuevoUsuario = new usuario({
-        rol,
-        nombre,
-        apellido,
-        email,
-        cedula,
-        telefono,
-        contrasena
+        rol: req.body.rol,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        email: req.body.email,
+        cedula: req.body.cedula,
+        telefono: req.body.telefono,
+        contrasena: req.body.contrasena
     });
+
     try {
-        nuevoUsuario.save();
-        res.json({ msg: 'Usuario creado correctamente' });
+        const nuevaUsuario = await nuevoUsuario.save();
+        res.status(201).json({ msg: 'Usuario creado correctamente', usuario: nuevaUsuario });
     } catch (error) {
         console.log(error);
-        res.status(400).send('Hubo un error');
+        res.status(400).send('Hubo un error al crear el usuario');
     }
 }
 

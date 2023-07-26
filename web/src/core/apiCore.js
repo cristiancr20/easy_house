@@ -1,5 +1,6 @@
 
 //registrar Persona
+// apiCore.js
 export const registrarPersona = async user => {
     try {
         const response = await fetch('http://localhost:5000/registrar/usuario', {
@@ -10,12 +11,21 @@ export const registrarPersona = async user => {
             },
             body: JSON.stringify(user)
         });
-        return await response.json();
-    } catch (error) {
-        console.log(error);
-    }
-}
 
+        const data = await response.json();
+
+        if (response.ok) {
+            return data;
+        } else {
+            throw new Error(data.error || 'Hubo un problema al registrar el usuario.');
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+//inicio de sesion
 //inicio de sesion
 export const iniciarSesion = async user => {
     try {
@@ -27,11 +37,22 @@ export const iniciarSesion = async user => {
             },
             body: JSON.stringify(user)
         });
-        return await response.json();
+
+        const data = await response.json();
+        if (response.ok) {
+            // El inicio de sesión fue exitoso, devolver los datos del usuario
+            return data;
+        } else {
+            // Hubo un error en el inicio de sesión, devolver el mensaje de error del servidor
+            throw new Error(data.message);
+        }
     } catch (error) {
+        // Error de red u otro error, puedes mostrar un mensaje de error genérico aquí
         console.log(error);
+        throw new Error('Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde.');
     }
 }
+
 
 export const authenticate = (data, next) => {
     if (typeof window !== 'undefined') {
@@ -47,6 +68,6 @@ export const isAuthenticated = () => {
     if (localStorage.getItem('jwt')) {
         return JSON.parse(localStorage.getItem('jwt'));
     } else {
-        return false;
+        return null;
     }
 }
