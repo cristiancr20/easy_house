@@ -26,7 +26,6 @@ export const registrarPersona = async user => {
 
 
 //inicio de sesion
-//inicio de sesion
 export const iniciarSesion = async user => {
     try {
         const response = await fetch('http://localhost:5000/iniciar/sesion', {
