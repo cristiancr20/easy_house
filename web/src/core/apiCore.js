@@ -3,7 +3,7 @@
 // apiCore.js
 export const registrarPersona = async user => {
     try {
-        const response = await fetch('http://localhost:5000/registrar/usuario', {
+        const response = await fetch('http://node-server-service:5000/registrar/usuario', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -28,7 +28,7 @@ export const registrarPersona = async user => {
 //inicio de sesion
 export const iniciarSesion = async user => {
     try {
-        const response = await fetch('http://localhost:5000/iniciar/sesion', {
+        const response = await fetch('http://node-server-service:5000/iniciar/sesion', {
             method: "POST",
             headers: {
                 Accept: 'application/json',

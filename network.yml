@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: NetworkPolicy
+metadata:
+  name: redapp
+spec:
+  podSelector:
+    matchLabels:
+      app: react-app
+      app: node-server
+      app: mongo-db
+  ingress: []
