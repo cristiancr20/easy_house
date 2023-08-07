@@ -12,10 +12,12 @@ app.use(cors());
 
 //conection bd
 
-const mongoURL = process.env.DATABASE
+const mongoURL = "mongodb://mongo-db-service.default.svc.cluster.local:27017/easy_house";
+
 
 mongoose
-  .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true, directConnection:true
+  })
   .then(() => console.log('Conexión exitosa con MongoDB'))
   .catch(err => console.error('Error al conectar con MongoDB:', err));
 

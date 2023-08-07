@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: react-app-service
 spec:
+  type: LoadBalancer  # Cambiar "ClusterIP" a "LoadBalancer"
   selector:
     app: react-app
   ports:
@@ -17,6 +18,7 @@ kind: Service
 metadata:
   name: node-server-service
 spec:
+  type: LoadBalancer
   selector:
     app: node-server
   ports:
@@ -31,6 +33,7 @@ kind: Service
 metadata:
   name: mongo-db-service
 spec:
+  type: LoadBalancer
   selector:
     app: mongo-db
   ports:
