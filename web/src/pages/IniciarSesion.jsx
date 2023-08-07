@@ -16,7 +16,8 @@ const IniciarSesion = () => {
     });
 
     const { email, contrasena, loading, error, redirectToReferrer } = values;
-    const { user } = isAuthenticated();
+    const isAuthenticatedResult = isAuthenticated();
+    const { user } = isAuthenticatedResult || {};
 
     const handleChange = (name) => (event) => {
         setValues({ ...values, error: false, [name]: event.target.value });
@@ -64,14 +65,14 @@ const IniciarSesion = () => {
                 user.rol === "Arrendador"
             ) {
                 console.log(user);
-                return (window.location.href = "/arrendador");
+                return (window.location.href = "/registrar/arriendo");
             }
             if (
                 user.email === email &&
                 user.contrasena === contrasena &&
                 user.rol === "Arrendatario"
             ) {
-                return (window.location.href = "/arrendatario");
+                return (window.location.href = "/obtener/arriendo");
             }
         }
         // Si no está autenticado o no cumple ninguna condición de redirección, no hace nada.

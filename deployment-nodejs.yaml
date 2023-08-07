@@ -19,4 +19,12 @@ spec:
             - containerPort: 5000
           env:
             - name: MONGO_URL
-              value: "mongodb://mongo-db-service:27017/easyhouse"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_URL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_SECRET

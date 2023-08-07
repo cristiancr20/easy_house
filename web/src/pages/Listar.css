@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+
+:root{
+    --color-uno: #081930;
+    --color-dos: #42e5fd;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.listar__container{
+    background: var(--color-uno);
+    height: 100vh;
+    
+}
+
+.lista{
+    padding: 20px;
+}
+
+.listar__container .lista{
+    width: 70%;
+    margin: auto;
+}
+
+
+.card_container {
+    padding: 20px;
+}
+
+.card_container .card{
+
+    width: 70%;
+    margin: 20px auto;
+    border:1px solid var(--color-dos);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.card_container .card .card_descripcion p{
+    margin: 5px;
+}
+
+.post_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 200px;
+    border-radius: 10px;
+    font-weight: bold;
+    background: var(--color-dos);
+    color: var(--color-uno);
+}
+
+
+.post{
+    margin: 0 10px ;
+}

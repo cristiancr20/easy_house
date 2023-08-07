@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Arrendador from './pages/Arrendador';
 import Arrendatario from './pages/Arrendatario';
 
+import RegistrarArriendosForm from './pages/CrearArriendoForm';
+import ListarArriendo from './pages/Listar';
+
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path ="/arrendador" element={<Arrendador/>}></Route>
           <Route path='/arrendatario' element={<Arrendatario/>}></Route>
 
+          <Route path='/obtener/arriendo' element = {<ListarArriendo/>}/>
+          <Route path="/registrar/arriendo" element={<RegistrarArriendosForm/>} />
+          
 
           <Route path='*' element="Error 404"></Route> 
         </Routes>
