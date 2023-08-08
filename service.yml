@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-app-service
+  name: kubectl 
 spec:
-  type: LoadBalancer  # Cambiar "ClusterIP" a "LoadBalancer"
+  type: LoadBalancer
   selector:
     app: react-app
   ports:
     - protocol: TCP
-      port: 80
+      port: 3000
       targetPort: 3000
+      nodePort: 30005  # Corrección: "nodePort" en minúsculas
 
 ---
 
@@ -25,6 +26,7 @@ spec:
     - protocol: TCP
       port: 5000
       targetPort: 5000
+      nodePort: 30001  # Corrección: "nodePort" en minúsculas
 
 ---
 
@@ -39,3 +41,5 @@ spec:
   ports:
     - protocol: TCP
       port: 27017
+      targetPort: 27017
+      nodePort: 30002  # Corrección: "nodePort" en minúsculas

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 //crear un nuevo usuario
 exports.crearUsuario = async (req, res) => {
+
     const nuevoUsuario = new usuario({
         rol: req.body.rol,
         nombre: req.body.nombre,
@@ -36,16 +37,18 @@ exports.obtenerUsuarios = async (req, res) => {
 }
 
 //iniciar sesion
-exports.iniciarSesion = async (req, res) => {
+/* exports.iniciarSesion = async (req, res) => {
     try{
         const {email, contrasena} = req.body;
         const user = await usuario.findOne({email});
         if(!user){
             res.status(400).json({msg: 'El usuario no existe'});
+            return;
         }
 
         if(contrasena !== user.contrasena){
             res.status(400).json({msg: 'La contraseña es incorrecta'});
+            return;
         }
 
         if(user.contrasena === contrasena){
@@ -60,5 +63,29 @@ exports.iniciarSesion = async (req, res) => {
         }
     }catch(error){
         return res.status(400).json({msg: 'Hubo un error'});
+    }
+} */
+
+// Iniciar sesión
+// Iniciar sesión
+exports.iniciarSesion = async (req, res) => {
+    try {
+        const { email, contrasena } = req.body;
+        const user = await usuario.findOne({ email });
+        if (!user) {
+            res.status(400).json({ msg: 'El usuario no existe' });
+            return;
+        }
+
+        if (contrasena !== user.contrasena) {
+            res.status(400).json({ msg: 'La contraseña es incorrecta' });
+            return;
+        }
+
+        // Return response with user information to frontend client
+        const { _id, rol } = user;
+        return res.json({ user: { _id, email, rol } });
+    } catch (error) {
+        return res.status(400).json({ msg: 'Hubo un error' });
     }
 }

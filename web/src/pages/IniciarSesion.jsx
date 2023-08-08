@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import login_img from "../img/login.svg";
 import "./UsuarioStyle.css";
 
-import { iniciarSesion, authenticate, isAuthenticated } from "../core/apiCore";
+import { iniciarSesion } from "../core/apiCore"; // Eliminamos los métodos relacionados con JWT
 
 const IniciarSesion = () => {
     const [values, setValues] = useState({
@@ -12,12 +12,9 @@ const IniciarSesion = () => {
         contrasena: "",
         error: "",
         loading: false,
-        redirectToReferrer: false,
     });
 
-    const { email, contrasena, loading, error, redirectToReferrer } = values;
-    const isAuthenticatedResult = isAuthenticated();
-    const { user } = isAuthenticatedResult || {};
+    const { email, contrasena, loading, error } = values;
 
     const handleChange = (name) => (event) => {
         setValues({ ...values, error: false, [name]: event.target.value });
@@ -31,16 +28,11 @@ const IniciarSesion = () => {
                 if (data.error) {
                     setValues({ ...values, error: data.error, loading: false });
                 } else {
-                    authenticate(data, () => {
-                        setValues({
-                            ...values,
-                            redirectToReferrer: true,
-                        });
-                    });
+                    // Handle successful login (you can redirect or update state here)
+                    console.log("Login successful");
                 }
             })
             .catch((error) => {
-                // Aquí manejas el error y muestras un mensaje en la interfaz de usuario
                 setValues({
                     ...values,
                     error: "Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde.",
@@ -54,8 +46,6 @@ const IniciarSesion = () => {
             {error}
         </div>
     );
-
-
 
     const redirectUser = () => {
         if (redirectToReferrer) {
@@ -77,6 +67,7 @@ const IniciarSesion = () => {
         }
         // Si no está autenticado o no cumple ninguna condición de redirección, no hace nada.
     };
+    
 
     const signInForm = () => (
         <div className="login__usuario_container">
