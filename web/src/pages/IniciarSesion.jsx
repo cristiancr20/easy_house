@@ -14,6 +14,8 @@ const IniciarSesion = () => {
         loading: false,
     });
 
+    const [user, setUser] = useState(null);
+
     const { email, contrasena, loading, error } = values;
 
     const handleChange = (name) => (event) => {
@@ -30,6 +32,8 @@ const IniciarSesion = () => {
                 } else {
                     // Handle successful login (you can redirect or update state here)
                     console.log("Login successful");
+                    setValues({ ...values, loading: false });
+                    setUser(data.user); // Store user data in state
                 }
             })
             .catch((error) => {
@@ -48,23 +52,16 @@ const IniciarSesion = () => {
     );
 
     const redirectUser = () => {
-        if (redirectToReferrer) {
-            if (
-                user.email === email &&
-                user.contrasena === contrasena &&
-                user.rol === "Arrendador"
-            ) {
-                console.log(user);
-                return (window.location.href = "/registrar/arriendo");
-            }
-            if (
-                user.email === email &&
-                user.contrasena === contrasena &&
-                user.rol === "Arrendatario"
-            ) {
-                return (window.location.href = "/obtener/arriendo");
+        if (user) {
+            if (user.email === email && user.contrasena === contrasena) {
+                if (user.rol === "Arrendador") {
+                    return (window.location.href = "/registrar/arriendo");
+                } else if (user.rol === "Arrendatario") {
+                    return (window.location.href = "/obtener/arriendo");
+                }
             }
         }
+        
         // Si no está autenticado o no cumple ninguna condición de redirección, no hace nada.
     };
     
