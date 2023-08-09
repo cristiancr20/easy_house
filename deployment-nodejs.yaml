@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: node-server
-          image: cristiancapa20/usuarios_back:v9 # Reemplaza esto con tu imagen de Node.js
+          image: cristiancapa20/usuarios_back:v10 # Reemplaza esto con tu imagen de Node.js
           ports:
             - containerPort: 5000
           env:

@@ -12,7 +12,7 @@ app.use(cors());
 
 //conection bd
 
-const mongoURL = "mongodb://mongo-db-service.default.svc.cluster.local:27017/easy_house";
+const mongoURL = process.env.DATABASE;
 
 
 mongoose
