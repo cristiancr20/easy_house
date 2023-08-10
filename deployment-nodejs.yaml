@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: node-server
-          image: cristiancapa20/usuarios_back:v12  # Reemplaza con la imagen correcta
+          image: cristiancapa20/usuarios_back:v13  # Reemplaza con la imagen correcta
           ports:
             - containerPort: 5000
           env:

@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //conection bd
-const mongoURL = process.env.MONGO_URI;
+const mongoURL = process.env.MONGO_URL;
 
 mongoose
   .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true})

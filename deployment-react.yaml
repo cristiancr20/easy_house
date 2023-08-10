@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: react-app
-          image: cristiancapa20/usuarios_front:v20  # Reemplaza con la imagen correcta
+          image: cristiancapa20/usuarios_front:v22  # Reemplaza con la imagen correcta
           ports:
             - containerPort: 3000

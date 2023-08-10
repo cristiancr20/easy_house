@@ -1,4 +1,4 @@
-const API_SERVER_URL = 'http://node-server-service:5000';
+const API_SERVER_URL = 'http://kubecluster-dns-cp8fhjh8.hcp.eastus.azmk8s.io';
 
 export const registrarPersona = async (user) => {
   try {
