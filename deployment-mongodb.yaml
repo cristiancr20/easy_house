@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: mongo-db
-          image: mongo # Utilizamos la imagen oficial de MongoDB desde Docker Hub
+          image: mongo
           ports:
             - containerPort: 27017

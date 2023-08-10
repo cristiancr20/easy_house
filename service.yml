@@ -1,3 +1,4 @@
+# services.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,7 +11,7 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-      nodePort: 30005  # Corrección: "nodePort" en minúsculas
+      nodePort: 30005
 
 ---
 
@@ -26,7 +27,7 @@ spec:
     - protocol: TCP
       port: 5000
       targetPort: 5000
-      nodePort: 30001  # Corrección: "nodePort" en minúsculas
+      nodePort: 30001
 
 ---
 
@@ -42,4 +43,4 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
-      nodePort: 30002  # Corrección: "nodePort" en minúsculas
+      nodePort: 30002

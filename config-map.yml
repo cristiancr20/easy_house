@@ -5,9 +5,4 @@ metadata:
   namespace: mongodb
 data:
   baseUrl: https://cloud.mongodb.com
-
-  # Optional Parameters
-  # projectName: My Ops/Cloud Manager Project
-
   orgId: 64d3f582b5443360a5b7f996
-

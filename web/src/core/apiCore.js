@@ -1,8 +1,8 @@
-
+const API_SERVER_URL = 'http://node-server-service:5000';
 
 export const registrarPersona = async (user) => {
   try {
-    const response = await fetch('http://localhost:5000/registrar/usuario', {
+    const response = await fetch(`${API_SERVER_URL}/registrar/usuario`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -27,7 +27,7 @@ export const registrarPersona = async (user) => {
 
 export const iniciarSesion = async (user) => {
   try {
-    const response = await fetch('http://localhost:5000/iniciar/sesion', {
+    const response = await fetch(`${API_SERVER_URL}/iniciar/sesion`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -70,7 +70,7 @@ export const isAuthenticated = () => {
 
 export const crearArriendo = async (arriendo) => {
   try {
-    const response = await fetch('http://localhost:5000/crear/nuevo/arriendo', {
+    const response = await fetch(`${API_SERVER_URL}/crear/nuevo/arriendo`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -93,7 +93,7 @@ export const crearArriendo = async (arriendo) => {
 
 export const listarArriendos = async () => {
   try {
-    const response = await fetch('http://localhost:5000/obtener/arriendo', {
+    const response = await fetch(`${API_SERVER_URL}/obtener/arriendo`, {
       method: "GET",
     });
 
