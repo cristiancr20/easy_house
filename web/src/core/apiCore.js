@@ -2,7 +2,7 @@
 
 export const registrarPersona = async (user) => {
   try {
-    const response = await fetch('http://10.224.0.5:30001/registrar/usuario', {
+    const response = await fetch('http://localhost:5000/registrar/usuario', {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -27,7 +27,7 @@ export const registrarPersona = async (user) => {
 
 export const iniciarSesion = async (user) => {
   try {
-    const response = await fetch('http://10.224.0.5:30001/iniciar/sesion', {
+    const response = await fetch('http://localhost:5000/iniciar/sesion', {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -70,7 +70,7 @@ export const isAuthenticated = () => {
 
 export const crearArriendo = async (arriendo) => {
   try {
-    const response = await fetch('http://10.224.0.5:30001/crear/nuevo/arriendo', {
+    const response = await fetch('http://localhost:5000/crear/nuevo/arriendo', {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -93,7 +93,7 @@ export const crearArriendo = async (arriendo) => {
 
 export const listarArriendos = async () => {
   try {
-    const response = await fetch('http://10.224.0.5:30001/obtener/arriendo', {
+    const response = await fetch('http://localhost:5000/obtener/arriendo', {
       method: "GET",
     });
 

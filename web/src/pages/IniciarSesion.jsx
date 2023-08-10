@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import login_img from "../img/login.svg";
 import "./UsuarioStyle.css";
-
-import { iniciarSesion } from "../core/apiCore"; // Eliminamos los métodos relacionados con JWT
+import { iniciarSesion } from "../core/apiCore";
 
 const IniciarSesion = () => {
     const [values, setValues] = useState({
@@ -22,27 +20,47 @@ const IniciarSesion = () => {
         setValues({ ...values, error: false, [name]: event.target.value });
     };
 
-    const clickSubmit = (event) => {
+    const clickSubmit = async (event) => {
         event.preventDefault();
+        event.stopPropagation(); // Avoid event propagation
+
         setValues({ ...values, error: false, loading: true });
-        iniciarSesion({ email, contrasena })
-            .then((data) => {
-                if (data.error) {
-                    setValues({ ...values, error: data.error, loading: false });
-                } else {
-                    // Handle successful login (you can redirect or update state here)
-                    console.log("Login successful");
-                    setValues({ ...values, loading: false });
-                    setUser(data.user); // Store user data in state
-                }
-            })
-            .catch((error) => {
-                setValues({
-                    ...values,
-                    error: "Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde.",
-                    loading: false,
-                });
+        try {
+            const data = await iniciarSesion({ email, contrasena });
+            console.log(data);
+            if (data.error) {
+                setValues({ ...values, error: data.error, loading: false });
+            } else {
+                console.log("Login successful");
+                setValues({ ...values, loading: false });
+                setUser(data.user);
+                redirectUser(); // Call redirection here
+            }
+        } catch (error) {
+            setValues({
+                ...values,
+                error: "Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde.",
+                loading: false,
             });
+        }
+    };
+
+    const redirectUser = () => {
+        if (
+            user.email === email &&
+            user.contrasena === contrasena &&
+            user.rol === "Arrendador"
+        ) {
+            console.log(user);
+            return (window.location.href = "/registrar/arriendo");
+        }
+        if (
+            user.email === email &&
+            user.contrasena === contrasena &&
+            user.rol === "Arrendatario"
+        ) {
+            return (window.location.href = "/obtener/arriendo");
+        }
     };
 
     const showError = () => (
@@ -50,21 +68,6 @@ const IniciarSesion = () => {
             {error}
         </div>
     );
-
-    const redirectUser = () => {
-        if (user) {
-            if (user.email === email && user.contrasena === contrasena) {
-                if (user.rol === "Arrendador") {
-                    return (window.location.href = "/registrar/arriendo");
-                } else if (user.rol === "Arrendatario") {
-                    return (window.location.href = "/obtener/arriendo");
-                }
-            }
-        }
-        
-        // Si no está autenticado o no cumple ninguna condición de redirección, no hace nada.
-    };
-    
 
     const signInForm = () => (
         <div className="login__usuario_container">
@@ -111,7 +114,6 @@ const IniciarSesion = () => {
         <div className="container">
             {showError()}
             {signInForm()}
-            {redirectUser()}
             <br />
             <Link
                 to="/recuperar-contrasena"

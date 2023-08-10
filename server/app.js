@@ -11,15 +11,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //conection bd
-
-const mongoURL = process.env.DATABASE;
-
+const mongoURL = process.env.MONGO_URI;
 
 mongoose
-  .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true, directConnection:true
-  })
+  .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => console.log('Conexión exitosa con MongoDB'))
-  .catch(err => console.error('Error al conectar con MongoDB:', err));
+  .catch(err => console.error('Error al conectar con MongoDB:', err)); 
 
 
 const port = process.env.PORT;

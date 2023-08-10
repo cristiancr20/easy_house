@@ -84,7 +84,7 @@ exports.iniciarSesion = async (req, res) => {
 
         // Return response with user information to frontend client
         const { _id, rol } = user;
-        return res.json({ user: { _id, email, rol } });
+        return res.json({ user: { _id, email,contrasena, rol } });
     } catch (error) {
         return res.status(400).json({ msg: 'Hubo un error' });
     }
