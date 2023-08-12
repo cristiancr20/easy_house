@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1  # Número deseado de réplicas
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: cristiancapa20/usuarios_back:v13 # Ajusta la imagen y la versión
+          ports:
+            - containerPort: 5000  # Puerto en el que escucha tu backend
+          env:
+            - name: MONGO_URI
+              value: "mongodb+srv://maribel20230809:admin@cluster0.xlhzjo9.mongodb.net/?retryWrites=true&w=majority"  # Conexión a tu base de datos MongoDB

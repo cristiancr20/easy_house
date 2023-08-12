@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1  # Número deseado de réplicas
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: cristiancapa20/usuarios_front:v29  # Ajusta la imagen y la versión
+          ports:
+            - containerPort: 3000  # Puerto en el que escucha tu frontend

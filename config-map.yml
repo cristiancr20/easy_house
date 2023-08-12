@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: my-project
-  namespace: mongodb
-data:
-  baseUrl: https://cloud.mongodb.com
-  orgId: 64d3f582b5443360a5b7f996

@@ -1,8 +1,10 @@
-const API_SERVER_URL = 'http://kubecluster-dns-cp8fhjh8.hcp.eastus.azmk8s.io';
+import axios from 'axios';
 
-export const registrarPersona = async (user) => {
+const API_SERVER_URL = 'http://backend-service:5000';
+
+/* export const registrarPersona = async (user) => {
   try {
-    const response = await fetch(`${API_SERVER_URL}/registrar/usuario`, {
+    const response = await axios(`${API_SERVER_URL}/registrar/usuario`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -23,7 +25,30 @@ export const registrarPersona = async (user) => {
   } catch (error) {
     throw error;
   }
+}; */
+
+export const registrarPersona = async (user) => {
+  try {
+    const response = await axios.post(`${API_SERVER_URL}/registrar/usuario`, user, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error(
+        response.data.error || "Hubo un problema al registrar el usuario."
+      );
+    }
+  } catch (error) {
+    throw error;
+  }
 };
+
+
 
 export const iniciarSesion = async (user) => {
   try {
