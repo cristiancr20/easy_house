@@ -1,33 +1,26 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
-const API_SERVER_URL = 'http://backend-service:5000';
+const API_USUARIOS_URL = 'http://localhost:8000/api/usuarios';
+const API_ARRIENDOS_URL = 'http://localhost:8000/api/arriendos';
 
-/* export const registrarPersona = async (user) => {
+export const registrarPersona = async (user) => {
   try {
-    const response = await axios(`${API_SERVER_URL}/registrar/usuario`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+    const response = await axios.post(`${API_USUARIOS_URL}/registrar/usuario`, user);
 
-    const data = await response.json();
-
-    if (response.ok) {
-      return data;
+    if (response.status === 201) {
+      return response.data;
     } else {
       throw new Error(
-        data.error || "Hubo un problema al registrar el usuario."
+        response.data.error || "Hubo un problema al registrar el usuario."
       );
     }
   } catch (error) {
     throw error;
   }
-}; */
+};
 
-export const registrarPersona = async (user) => {
+/*export const registrarPersona = async (user) => {
   try {
     const response = await axios.post(`${API_SERVER_URL}/registrar/usuario`, user, {
       headers: {
@@ -46,34 +39,44 @@ export const registrarPersona = async (user) => {
   } catch (error) {
     throw error;
   }
-};
+};*/
 
 
 
 export const iniciarSesion = async (user) => {
   try {
-    const response = await fetch(`${API_SERVER_URL}/iniciar/sesion`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+      const response = await fetch(`${API_USUARIOS_URL}/iniciar/sesion`, {
+          method: 'POST',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user),
+      });
 
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    } else {
-      throw new Error(data.message);
-    }
+      const data = await response.json();
+      if (response.ok) {
+          // Guarda el token en el almacenamiento local
+          localStorage.setItem('token', data.token);
+          return data;
+      } else {
+          throw new Error(data.message);
+      }
   } catch (error) {
-    console.log(error);
-    throw new Error(
-      "Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde."
-    );
+      console.log(error);
+      throw new Error('Hubo un error en el inicio de sesión. Inténtalo de nuevo más tarde.');
   }
 };
+
+export const obtenerUsuarioActual = () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+      const decoded = jwt_decode(token);
+      return decoded;
+  }
+  return null;
+};
+
 
 /* export const authenticate = (data, next) => {
   if (typeof window !== "undefined") {
@@ -95,7 +98,7 @@ export const isAuthenticated = () => {
 
 export const crearArriendo = async (arriendo) => {
   try {
-    const response = await fetch(`${API_SERVER_URL}/crear/nuevo/arriendo`, {
+    const response = await fetch(`${API_ARRIENDOS_URL}/crear/nuevo/arriendo`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -118,7 +121,7 @@ export const crearArriendo = async (arriendo) => {
 
 export const listarArriendos = async () => {
   try {
-    const response = await fetch(`${API_SERVER_URL}/obtener/arriendo`, {
+    const response = await fetch(`${API_ARRIENDOS_URL}/obtener/arriendo`, {
       method: "GET",
     });
 

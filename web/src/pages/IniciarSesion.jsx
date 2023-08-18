@@ -12,29 +12,23 @@ const IniciarSesion = () => {
         loading: false,
     });
 
-    const [user, setUser] = useState(null);
-
     const { email, contrasena, loading, error } = values;
 
     const handleChange = (name) => (event) => {
-        setValues({ ...values, error: false, [name]: event.target.value });
+        setValues({ ...values, error: "", [name]: event.target.value });
     };
 
     const clickSubmit = async (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Avoid event propagation
+        setValues({ ...values, error: "", loading: true });
 
-        setValues({ ...values, error: false, loading: true });
         try {
             const data = await iniciarSesion({ email, contrasena });
-            console.log(data);
             if (data.error) {
                 setValues({ ...values, error: data.error, loading: false });
             } else {
-                console.log("Login successful");
-                setValues({ ...values, loading: false });
-                setUser(data.user);
-                redirectUser(); // Call redirection here
+                console.log("Inicio de sesión exitoso");
+                redirectUser(data.user.rol);
             }
         } catch (error) {
             setValues({
@@ -45,21 +39,11 @@ const IniciarSesion = () => {
         }
     };
 
-    const redirectUser = () => {
-        if (
-            user.email === email &&
-            user.contrasena === contrasena &&
-            user.rol === "Arrendador"
-        ) {
-            console.log(user);
-            return (window.location.href = "/registrar/arriendo");
-        }
-        if (
-            user.email === email &&
-            user.contrasena === contrasena &&
-            user.rol === "Arrendatario"
-        ) {
-            return (window.location.href = "/obtener/arriendo");
+    const redirectUser = (rol) => {
+        if (rol === "Arrendador") {
+            window.location.href = "/registrar/arriendo";
+        } else if (rol === "Arrendatario") {
+            window.location.href = "/obtener/arriendo";
         }
     };
 
