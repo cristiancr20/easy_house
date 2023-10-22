@@ -22,56 +22,94 @@
 }
 
 .register__arriendos_form{
-    width: 90%;
-    padding: 20px;
+    width: 50%;
+    height: 50%;
     border-radius: 20px;
 }
 
-.register__arriendos_form form{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+
+.form-group .label{
+    background-color: var(--color-uno);
+    display: flex;
+    align-items: center;
+    place-content: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.register__arriendos_form h1{
-    color: var(--color-dos);
-    margin: 10px;
+.form-group .input{
+    padding: 10%;
     text-align: center;
-    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.register__arriendos_form div{
-    width: 80%;
-    margin: auto;
-    padding: 10px;
+.form-group .input h2{
+    color: #fff;
+    font-size: 50px;
+    margin: 20px;
 }
+
 
 .register__arriendos_form label{
     color: var(--color-dos);
     font-weight: bold;
     display: block;
     text-align: center;
+    font-size: 40px;
 }
 
 .register__arriendos_form input{
+    outline: none;
+    padding: 10px;
+    font-size: 30px;
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
+}
+
+.nextbutton,
+.backbutton{
+    width: 50px;
+    background: var(--color-dos);
+    border: none;
+    border-radius: 70%;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    margin: 0 20px ;
+}
+
+.register__arriendos_form span{
+    color: #fff;
+    font-size: 30px;
+    margin: 20px ;
+}
+
+.register__arriendos_form textarea{
     padding: 10px;
     width: 100%;
     margin: 10px;
     outline: none;
     border-radius: 5px;
     border: none;
+    font-size: 40px;
 }
 
-.register__arriendos_form .boton{
-    width: 50%;
+.register__arriendos_form .button-section{
+    width: 100%;
+    margin: auto;
     display: flex;
     justify-content: center;   
 }
 
-.register__arriendos_form .form-control-img{
-    cursor: pointer;
-    background: #fff;
-}
-.register__arriendos_form .boton button{
+.register__arriendos_form .prev-button,
+.register__arriendos_form .next-button,
+.register__arriendos_form .register-button{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -82,6 +120,7 @@
     font-size: 20px;
     cursor: pointer;
     transition: all .3s ease-in-out;
+    margin: 0 20px ;
 }
 
 

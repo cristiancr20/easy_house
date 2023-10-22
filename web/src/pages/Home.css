@@ -9,6 +9,7 @@
     --color-dos: #42e5fd;
 }
 
+
 .home {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -55,7 +56,6 @@
 .home__boton {
     width: 50%;
     font-size: 20px;
-
     padding: 5px;
     background: var(--color-dos);
     color: var(--color-uno);

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import login_img from "../img/login.svg";
 import "./UsuarioStyle.css";
 import { iniciarSesion } from "../core/apiCore";
+import jwt_decode from 'jwt-decode'; // Importa jwt-decode
 
 const IniciarSesion = () => {
     const [values, setValues] = useState({
@@ -27,7 +28,17 @@ const IniciarSesion = () => {
             if (data.error) {
                 setValues({ ...values, error: data.error, loading: false });
             } else {
+                // Guarda el token en el almacenamiento local
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('nombreUsuario', data.user.nombre);
+                localStorage.setItem('rolUsuario', data.user.rol);
+                localStorage.setItem('idUsuario', data.user._id);
+
+                // Decodifica el token para obtener la información del usuario
+                const decodedToken = jwt_decode(data.token);
+
                 console.log("Inicio de sesión exitoso");
+                console.log("Nombre de usuario:", decodedToken.nombre); // Ajusta esto según la estructura de tu token
                 redirectUser(data.user.rol);
             }
         } catch (error) {
@@ -41,9 +52,9 @@ const IniciarSesion = () => {
 
     const redirectUser = (rol) => {
         if (rol === "Arrendador") {
-            window.location.href = "/registrar/arriendo";
+            window.location.href = "/home/arrendador";
         } else if (rol === "Arrendatario") {
-            window.location.href = "/obtener/arriendo";
+            window.location.href = "/home";
         }
     };
 
@@ -98,13 +109,7 @@ const IniciarSesion = () => {
         <div className="container">
             {showError()}
             {signInForm()}
-            <br />
-            <Link
-                to="/recuperar-contrasena"
-                className="btn btn-sm btn-outline-danger"
-            >
-                ¿Olvidaste tu contraseña?
-            </Link>
+
         </div>
     );
 };

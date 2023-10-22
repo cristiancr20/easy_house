@@ -41,87 +41,43 @@ exports.obtenerUsuarios = async (req, res) => {
     }
 }
 
-//iniciar sesion
-/* exports.iniciarSesion = async (req, res) => {
-    try{
-        const {email, contrasena} = req.body;
-        const user = await usuario.findOne({email});
-        if(!user){
-            res.status(400).json({msg: 'El usuario no existe'});
-            return;
-        }
-
-        if(contrasena !== user.contrasena){
-            res.status(400).json({msg: 'La contraseña es incorrecta'});
-            return;
-        }
-
-        if(user.contrasena === contrasena){
-            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET)
-            // persist the token as 't' in cookie with expiration date
-            res.cookie('t', token, { expire: new Date() + 9999 })
-            // return response with user and token to frontend client
-            const { _id, email, contrasena, rol } = user
-            return res.json({ token, user: { _id, email, contrasena, rol } })
-        }else{
-            res.status(400).json({msg: 'La contraseña es incorrecta'});
-        }
-    }catch(error){
-        return res.status(400).json({msg: 'Hubo un error'});
-    }
-} */
-
-// Iniciar sesión
-// Iniciar sesión
-/*exports.iniciarSesion = async (req, res) => {
-    try {
-        const { email, contrasena } = req.body;
-        const user = await usuario.findOne({ email });
-        if (!user) {
-            res.status(400).json({ msg: 'El usuario no existe' });
-            return;
-        }
-
-        if (contrasena !== user.contrasena) {
-            res.status(400).json({ msg: 'La contraseña es incorrecta' });
-            return;
-        }
-
-        // Return response with user information to frontend client
-        const { _id, rol } = user;
-        return res.json({ user: { _id, email, contrasena, rol } });
-    } catch (error) {
-        return res.status(400).json({ msg: 'Hubo un error' });
-    }
-}
-*/
 
 const jwt = require('jsonwebtoken');
+require('dotenv').config(); // Cargar variables de entorno
 
 exports.iniciarSesion = async (req, res) => {
+    const { email, contrasena } = req.body;
     try {
-        const { email, contrasena } = req.body;
         const user = await usuario.findOne({ email });
 
-        if (!user) {
+        if (!user || user.contrasena !== contrasena) {
             return res.status(401).json({ message: 'Credenciales incorrectas' });
-        }
+          }
 
-        if (contrasena !== user.contrasena) {
-            return res.status(401).json({ message: 'Credenciales incorrectas' });
-        }
-
-        const token = jwt.sign({ userId: user._id }, 'secretKey'); // Genera un token seguro
+        const token = jwt.sign({ userId: user._id, userName:user.nombre }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Genera un token seguro
 
         return res.status(200).json({
             token,
             user: {
                 _id: user._id,
                 email: user.email,
-                rol: user.rol
+                rol: user.rol,
+                nombre: user.nombre
             }
         });
     } catch (error) {
         return res.status(500).json({ message: 'Hubo un error en el servidor' });
     }
 };
+
+
+//cerrar sesion con eliminacion del token
+exports.cerrarSesion = async (req, res) => {
+    try {
+        res.clearCookie('token');
+        res.status(200).json({ message: 'Sesión cerrada correctamente' });
+    } catch (error) {
+        return res.status(500).json({ message: 'Hubo un error en el servidor' });
+    }
+};
+

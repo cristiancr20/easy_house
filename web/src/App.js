@@ -7,8 +7,9 @@ import Home from './pages/Home';
 import Arrendador from './pages/Arrendador';
 import Arrendatario from './pages/Arrendatario';
 
-import RegistrarArriendosForm from './pages/CrearArriendoForm';
-import ListarArriendo from './pages/Listar';
+import HomeArrendador from './pages/arrendador/HomeArrendador';
+import HomeArrendatario from './pages/arrendatario/HomeArrendatario';
+
 
 
 function App() {
@@ -22,9 +23,8 @@ function App() {
           <Route path ="/arrendador" element={<Arrendador/>}></Route>
           <Route path='/arrendatario' element={<Arrendatario/>}></Route>
 
-          <Route path='/obtener/arriendo' element = {<ListarArriendo/>}/>
-          <Route path="/registrar/arriendo" element={<RegistrarArriendosForm/>} />
-          
+          <Route path="/home/arrendador" element={<HomeArrendador/>} />
+          <Route path='/home' element={<HomeArrendatario/>}></Route>
 
           <Route path='*' element="Error 404"></Route> 
         </Routes>
@@ -34,3 +34,5 @@ function App() {
 }
 
 export default App;
+
+
