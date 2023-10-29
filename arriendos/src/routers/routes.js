@@ -8,8 +8,10 @@ router.post('/crear/nuevo/arriendo', arriendoController.crearArriendo);
 //obtener todos los arriendos
 router.get('/obtener/arriendo', arriendoController.obtenerArriendos);
 //obtener un arriendo por id
-router.get('/obtener/arriendo/:id', arriendoController.obtenerArriendo);
-//obtener un arriendo por diferentes criterios
-router.get('/buscar/arriendos', arriendoController.buscarArriendos);
+router.get('/obtener/arriendo/:id', arriendoController.obtenerArriendoId);
+//obtener arriendo por usuario del arrendador
+router.post('/arriendos/usuario', arriendoController.obtenerArriendosPorUsuario);
+//editar un arriendo
+router.put('/editar/arriendo/:id', arriendoController.editarArriendo);
 
 module.exports = router;

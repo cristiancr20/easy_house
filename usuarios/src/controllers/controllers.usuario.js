@@ -1,4 +1,4 @@
-const usuario = require('../models/usuarios')
+const usuario = require('../models/usuario')
 
 //patron factory
 const UsuarioFactoryMongoDB = require('../factory/UsuarioFactoryMongoDB')

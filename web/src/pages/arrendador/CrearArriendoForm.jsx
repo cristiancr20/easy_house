@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import './ArriendosStyle.css'
-import img_register_arriendo from '../img/register_arriengo.svg'
+import img_register_arriendo from '../../img/register_arriengo.svg'
+import Navbar from "../../components/Navbar";
 
-import { crearArriendo } from "../core/apiCore";
+
+import { crearArriendo } from "../../core/apiCore";
 
 const CrearArriendoForm = () => {
 
-    const token = localStorage.getItem('token');
+
+    /*const token = localStorage.getItem('token');
     const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
-    };
+    };*/
 
     const [step, setStep] = useState(1);
 
@@ -24,6 +27,7 @@ const CrearArriendoForm = () => {
         error: '',
         loading: false,
     });
+
 
     const { titulo, precio, ubicacion, capacidad, imagen, success, error, loading } = values;
 
@@ -45,9 +49,11 @@ const CrearArriendoForm = () => {
     }
 
     const clickSubmit = () => {
+
+        console.log("idusuario", localStorage.getItem('idUsuario'));
         setValues({ ...values, error: '', loading: true });
         const arriendo = {  titulo, precio, ubicacion, capacidad, imagen };
-        crearArriendo(arriendo, headers)
+        crearArriendo(arriendo)
             .then(data => {
                 if (data.error) {
                     setValues({ ...values, error: data.error, success: false, loading: false });
@@ -64,10 +70,13 @@ const CrearArriendoForm = () => {
                         loading: false,
                     });
                 }
+                console.log(arriendo);
+                console.log(data)
             })
             .catch(error => {
                 setValues({ ...values, error: 'Hubo un problema con la solicitud.', success: false, loading: false });
             });
+
     }
 
     const renderSection = () => {
@@ -177,6 +186,7 @@ const CrearArriendoForm = () => {
 
     return (
         <>
+            <Navbar />
             {showSuccess()}
             {showError()}
             {crearArriendoForm()}

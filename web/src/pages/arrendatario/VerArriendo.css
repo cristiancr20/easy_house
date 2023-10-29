@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+:root {
+    --color-uno: #081930;
+    --color-dos: #42e5fd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.verdetalle {
+    background: var(--color-uno);
+    width: 100%;
+    height: 100vh;
+
+}
+
+.verdetalle .info {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    padding: 20px;
+}
+
+.verdetalle .info .img {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    padding: 20px;
+
+}
+
+.verdetalle .info .img img {
+    border-radius: 20px;
+    width: 100%;
+}
+
+.verdetalle .info .details {
+    width: 80%;
+    margin: 0 auto;
+    color: var(--color-dos);
+    padding: 20px;
+}
+
+.verdetalle .info .details h2 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.verdetalle .info .details p {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.verdetalle .info .details .details-op {
+
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.verdetalle .info .details .options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    border: 2px solid var(--color-dos);
+    place-items: center;
+    padding: 20px;
+    border-radius: 20px;
+
+}
+
+.verdetalle .info .details .details-op .button-reserva {
+    background: var(--color-dos);
+    color: var(--color-uno);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    place-items: center;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+
+.verdetalle .info .details .details-op .button-reserva:hover {
+    transform: scale(1.2);
+    color: var(--color-uno);
+    background: #fff;
+}
+
+.verdetalle .info .details .details-op  .button-reserva.disabled {
+    /* Estilos sin animación, por ejemplo, quitar transiciones y animaciones */
+    transition: none;
+    animation: none;
+    /* Otros estilos específicos cuando está ocupado, por ejemplo, cambiar el color de fondo o el cursor */
+    background-color: #ccc;
+    cursor: not-allowed;
+  }

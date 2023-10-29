@@ -46,4 +46,4 @@ const nuevoUsuario = mongoose.Schema({
 }, { versionKey: false })
 
 
-module.exports = mongoose.model('usuario', nuevoUsuario)
+module.exports = mongoose.model('Usuario', nuevoUsuario);

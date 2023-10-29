@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const nuevoArriendo = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'usuario',  // Referencia al modelo de usuario
+        ref: 'Usuario',  // Referencia al modelo de usuario
     },
     titulo:{
         type: String,

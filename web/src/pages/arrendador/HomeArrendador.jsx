@@ -1,13 +1,13 @@
 import React from "react";
 
 import Navbar from "../../components/Navbar";
-import CrearArriendoForm from "../CrearArriendoForm";
 
 const HomeArrendador = () => {
     return (
         <div>
             <Navbar />
-            <CrearArriendoForm />
+            <h1>Home Arrendador</h1>
+
         </div>
     );
 };

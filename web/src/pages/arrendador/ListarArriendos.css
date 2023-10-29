@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+
+:root{
+    --color-uno: #081930;
+    --color-dos: #42e5fd;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.listar__arriendos-usuario h1{
+    text-align: center;
+    margin: 10px;
+}
+
+.listar__arriendos-usuario table{
+    width: 80%;
+    margin: auto;
+
+}
+
+.listar__arriendos-usuario table thead tr th{
+    background: var(--color-uno);
+    color: var(--color-dos);
+    padding: 10px;
+}
+
+.listar__arriendos-usuario table tbody tr td{
+    text-align: center;
+    padding: 10px;
+    background: var(--color-dos);
+    color: var(--color-uno);
+}
+

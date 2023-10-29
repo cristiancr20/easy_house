@@ -4,6 +4,7 @@ import axios from 'axios';
 const API_USUARIOS_URL = 'http://localhost:8000/api/usuarios';
 const API_ARRIENDOS_URL = 'http://localhost:8000/api/arriendos';
 
+//REGISTRAR PERSONA
 export const registrarPersona = async (user) => {
   try {
     const response = await axios.post(`${API_USUARIOS_URL}/registrar/usuario`, user);
@@ -20,7 +21,7 @@ export const registrarPersona = async (user) => {
   }
 };
 
-
+//INICIAR SESION
 export const iniciarSesion = async (user) => {
   try {
       const response = await fetch(`${API_USUARIOS_URL}/iniciar/sesion`, {
@@ -46,6 +47,8 @@ export const iniciarSesion = async (user) => {
   }
 };
 
+
+//CERRAR SESION
 export const cerrarSesion = async () => {
   try {
     const response = await fetch(`${API_USUARIOS_URL}/cerrar/sesion`, {
@@ -70,42 +73,17 @@ export const cerrarSesion = async () => {
 };
 
 
-/*
-export const obtenerUsuarioActual = () => {
-  const token = localStorage.getItem('token');
-  if (token) {
-      const decoded = jwt_decode(token);
-      return decoded;
-  }
-  return null;
-};*/
 
-
-/* export const authenticate = (data, next) => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("jwt", JSON.stringify(data));
-    next();
-  }
-};
-
-export const isAuthenticated = () => {
-  if (typeof window == "undefined") {
-    return false;
-  }
-  if (localStorage.getItem("jwt")) {
-    return JSON.parse(localStorage.getItem("jwt"));
-  } else {
-    return null;
-  }
-}; */
-
-export const crearArriendo = async (arriendo, headers) => {
+//CREAR ARRIENDO
+export const crearArriendo = async (arriendo) => {
  // Obtén el token del almacenamiento local
-
+ const token = localStorage.getItem('token');
   try {
     const response = await fetch(`${API_ARRIENDOS_URL}/crear/nuevo/arriendo`, {
       method: "POST",
-      headers,
+      headers:{'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`},
       body: JSON.stringify(arriendo),
     });
 
@@ -114,13 +92,15 @@ export const crearArriendo = async (arriendo, headers) => {
     if (!response.ok) {
       throw new Error(data.error || "Hubo un problema al crear el arriendo.");
     }
-
+    console.log(data);
     return data;
   } catch (error) {
     throw new Error("Hubo un problema con la solicitud: " + error.message);
   }
 };
 
+
+//LISTAR ARRIENDOS
 export const listarArriendos = async () => {
   try {
     const response = await fetch(`${API_ARRIENDOS_URL}/obtener/arriendo`, {
@@ -144,29 +124,67 @@ export const listarArriendos = async () => {
   }
 };
 
-//obtener los arriendos por criterio
-export const buscarArriendos = async (criterios) => {
+
+
+// Función para obtener arriendos por usuario
+export const obtenerArriendosPorUsuario = async (userId, token) => {
   try {
-    const url = `${API_ARRIENDOS_URL}/buscar/arriendos`;
-
-    // Convierte el objeto criterios en una cadena de consulta
-    const queryString = Object.keys(criterios)
-      .map(key => `${key}=${encodeURIComponent(criterios[key])}`)
-      .join('&');
-
-    const response = await fetch(`${url}?${queryString}`, {
-      method: 'GET',
+    const response = await fetch(`${API_ARRIENDOS_URL}/arriendos/usuario`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userId }), // Envía el userId en el cuerpo de la solicitud
     });
 
     if (!response.ok) {
-      throw new Error('Hubo un problema en la búsqueda.');
+      throw new Error('Error al obtener arriendos por usuario');
     }
 
     const data = await response.json();
-
     return data;
   } catch (error) {
-    console.error('Error en la búsqueda:', error);
+    throw error;
+  }
+};
+
+// Función para obtener los detalles de un arriendo
+export const obtenerDetallesArriendo = async (arriendoId) => {
+  try {
+    const response = await fetch(`${API_ARRIENDOS_URL}/obtener/arriendo/${arriendoId}`);
+    
+    if (!response.ok) {
+      throw new Error('Error al obtener los detalles del arriendo');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//editar arriendo
+export const editarArriendo = async (arriendoId, datosArriendo, token) => {
+  try {
+    const response = await fetch(`${API_ARRIENDOS_URL}/editar/arriendo/${arriendoId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(datosArriendo),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al editar el arriendo');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
     throw error;
   }
 };

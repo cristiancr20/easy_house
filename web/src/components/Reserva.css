@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+
+:root{
+    --color-uno: #081930;
+    --color-dos: #42e5fd;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.reserva{
+    background: #fff;
+    width: 350px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.reserva p{
+    margin: 20px;
+    font-size: 20px;
+    padding: 20px;
+}
