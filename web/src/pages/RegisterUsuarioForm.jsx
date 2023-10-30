@@ -66,14 +66,17 @@ const RegisterUsuarioForm = () => {
 
           <div>
             <label htmlFor="rol">Rol</label>
-
-            <input type="text"
+            <select
               id="rol"
               name="rol"
               value={rol}
-              placeholder="Rol"
               onChange={handleChange}
-            />
+              className="combo-box"
+            >
+              <option value="" disabled>Selecciona un rol</option>
+              <option value="Arrendador">Arrendador</option>
+              <option value="Arrendatario">Arrendatario</option>
+            </select>
           </div>
           <div>
             <label htmlFor="nombre">Nombre</label>

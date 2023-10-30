@@ -19,7 +19,6 @@ function Home() {
                     </h1>
                     <p>
                         HospedaU es una aplicación web que te permite gestionar tus propiedades de una manera fácil y sencilla.
-                        Así mismo, te permite buscar propiedades de acuerdo a tus necesidades.
                     </p>
 
                     <div className="home__botones">
