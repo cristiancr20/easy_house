@@ -1,8 +1,10 @@
 import axios from 'axios';
 //import jwt_decode from 'jwt-decode';
 
-const API_USUARIOS_URL = 'http://localhost:8000/api/usuarios';
-const API_ARRIENDOS_URL = 'http://localhost:8000/api/arriendos';
+//const API_USUARIOS_URL = 'http://localhost:8000/api/usuarios';
+const API_USUARIOS_URL = 'http://localhost:5000'
+//const API_ARRIENDOS_URL = 'http://localhost:8000/api/arriendos';
+const API_ARRIENDOS_URL = 'http://localhost:4000'
 
 //REGISTRAR PERSONA
 export const registrarPersona = async (user) => {

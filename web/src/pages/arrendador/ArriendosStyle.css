@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 
 
+
 :root{
     --color-uno: #081930;
     --color-dos: #42e5fd;
@@ -139,4 +140,13 @@
     font-size: 30px;
 }
 
-
+.my-map {
+    height: 400px; /* o el alto que desees */
+    width: 100%;
+  }
+  
+  /* Si tienes un contenedor que encierra el mapa, asegúrate de que también tenga dimensiones establecidas */
+  .map-container {
+    height: 400px; /* o el alto que desees */
+    width: 100%; /* Esto puede ser diferente según tus necesidades */
+  }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Listar.css';
 
-import { FaMapMarkerAlt, FaDollarSign, FaHouseUser } from 'react-icons/fa';
-import { FaCalendarDays, FaPeopleGroup } from 'react-icons/fa6';
+//import { FaMapMarkerAlt, FaDollarSign, FaHouseUser } from 'react-icons/fa';
+//import { FaCalendarDays, FaPeopleGroup } from 'react-icons/fa6';
 import { listarArriendos } from '../core/apiCore'; // Importa la función de búsqueda
 
 const Listar = () => {

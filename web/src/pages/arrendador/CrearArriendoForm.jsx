@@ -3,6 +3,7 @@ import './ArriendosStyle.css'
 import img_register_arriendo from '../../img/register_arriengo.svg'
 import Navbar from "../../components/Navbar";
 
+import Map from "../../components/Map";
 
 import { crearArriendo } from "../../core/apiCore";
 
@@ -52,7 +53,7 @@ const CrearArriendoForm = () => {
 
         console.log("idusuario", localStorage.getItem('idUsuario'));
         setValues({ ...values, error: '', loading: true });
-        const arriendo = {  titulo, precio, ubicacion, capacidad, imagen };
+        const arriendo = { titulo, precio, ubicacion, capacidad, imagen };
         crearArriendo(arriendo)
             .then(data => {
                 if (data.error) {
@@ -78,6 +79,7 @@ const CrearArriendoForm = () => {
             });
 
     }
+
 
     const renderSection = () => {
         switch (step) {
@@ -108,9 +110,10 @@ const CrearArriendoForm = () => {
                     <div className="form-group">
                         <div className="input">
                             <h2>Ingresa la ubicación de tu arriendo</h2>
-                            <input onChange={handleChange} type="text" name="ubicacion" placeholder="Ubicación" value={ubicacion} />
+                            <div className="my-map">
+                                <Map />
+                            </div>
                         </div>
-
                     </div>
                 );
 
