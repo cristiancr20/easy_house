@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import Icon_ubication from '../img/Icon_ubication.svg';
+/* import Icon_ubication from '../img/Icon_ubication.svg'; */
 
 const Map = () => {
   const [map, setMap] = useState(null);
@@ -30,8 +30,8 @@ const Map = () => {
     );
   }, []);
 
-  const customIcon = new L.Icon({
-    iconUrl: { Icon_ubication },
+  const customIcon = new L.Icon({/* 
+    iconUrl: { Icon_ubication }, */
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],

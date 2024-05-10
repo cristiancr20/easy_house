@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Navbar from './components/Navbar';
+
+
 import RegisterUsuarioForm from './pages/RegisterUsuarioForm';
 import IniciarSesion from './pages/IniciarSesion';
 import Home from './pages/Home';
@@ -19,6 +22,8 @@ function App() {
   return (
     <>
       <Router>
+
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/registrar/usuarios" element={<RegisterUsuarioForm />} />
